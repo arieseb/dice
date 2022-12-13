@@ -105,48 +105,6 @@ newGame.addEventListener('click', () => {
 
 defaultDisplay()
 
-/*try {
-  const winEvent = new Promise ((resolve, reject) => {
-    if (game.players[0].globalScore > 100 || game.players[1].globalScore > 100) {
-      resolve()
-    } else {
-      reject()
-    }
-  })
-
-} catch (error) {
-  console.error(error)
-}
-const gameWon = () => {
-   if (game.players[0].globalScore > 100) {
-    alert(`${game.players[0]} a gagné !`)
-  } else if (game.players[1].globalScore > 100) {
-    alert(`${game.players[1]} a gagné !`)
-  }
-}
-
-const error = () => {
-  alert('Une erreur s\'est produite !')
-}*/
-
 for (div of controlBtn) {
   div.addEventListener('click', game.gameRound)
 }
-
-//winEvent().then(gameWon, error)
-
-/*if (game.players[0].globalScore < 100 || game.players[1].globalScore < 100) {
-  for (div of controlBtn) {
-    div.addEventListener('click', game.gameRound)
-  }
-} else if (game.players[0].globalScore < 100) {
-  alert(`${game.players[0]} a gagné !`)
-} else if (game.players[1].globalScore < 100) {
-  alert(`${game.players[1]} a gagné !`)
-}*/
-
-/*for (div of controlBtn) {
-  div.addEventListener('click', game.gameRound)
-}*/
-
-//} while (player1.globalScore < 100 || player2.globalScore < 100)*/
