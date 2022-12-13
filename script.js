@@ -35,7 +35,6 @@ class Game {
   }
 
   gameRound = (event) => {
-    console.log(this.roundNumber)
     if (event.target.id === 'rollDice') {
       if (this.roundNumber % 2 !== 0) {
         this.players[0].rollDice()
@@ -105,6 +104,6 @@ newGame.addEventListener('click', () => {
 
 defaultDisplay()
 
-for (div of controlBtn) {
-  div.addEventListener('click', game.gameRound)
+for (button of controlBtn) {
+  button.addEventListener('click', game.gameRound)
 }
