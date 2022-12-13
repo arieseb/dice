@@ -52,6 +52,11 @@ class Game {
       }      
     }
   }
+
+  winMessage = (winner) => {
+    alert(`${winner} a gagné la partie !`)
+    this.playNewGame()
+  }
 }
 
 class Player {
@@ -72,6 +77,7 @@ class Player {
       this.roundScore = 0
       document.getElementById(`${this.id}-current`).innerText = this.roundScore
       game.roundNumber ++
+      return
     }
     document.getElementById(`${this.id}-current`).innerText = this.roundScore
   }
@@ -81,6 +87,11 @@ class Player {
     this.roundScore = 0
     document.getElementById(`${this.id}-current`).innerText = this.roundScore
     document.getElementById(`${this.id}-global`).innerText = this.globalScore
+    if (this.globalScore < 100 ) {
+      return
+    } else {
+      game.winMessage(this.displayName)
+    }
   }
 }
 
@@ -94,31 +105,35 @@ newGame.addEventListener('click', () => {
 
 defaultDisplay()
 
-const winEvent = new Promise ((resolve, reject) => {
-  if (game.players[0].globalScore > 100 || game.players[1].globalScore > 100) {
-    resolve()
-  } else {
-    reject()
-  }
-})
+/*try {
+  const winEvent = new Promise ((resolve, reject) => {
+    if (game.players[0].globalScore > 100 || game.players[1].globalScore > 100) {
+      resolve()
+    } else {
+      reject()
+    }
+  })
 
+} catch (error) {
+  console.error(error)
+}
 const gameWon = () => {
-   if (game.players[0].globalScore < 100) {
+   if (game.players[0].globalScore > 100) {
     alert(`${game.players[0]} a gagné !`)
-  } else if (game.players[1].globalScore < 100) {
+  } else if (game.players[1].globalScore > 100) {
     alert(`${game.players[1]} a gagné !`)
   }
 }
 
 const error = () => {
   alert('Une erreur s\'est produite !')
-}
+}*/
 
 for (div of controlBtn) {
   div.addEventListener('click', game.gameRound)
 }
 
-winEvent().then(gameWon, error)
+//winEvent().then(gameWon, error)
 
 /*if (game.players[0].globalScore < 100 || game.players[1].globalScore < 100) {
   for (div of controlBtn) {
