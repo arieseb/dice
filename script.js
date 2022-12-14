@@ -6,6 +6,7 @@ const player1Current = document.getElementById('player1-current')
 const player2Current = document.getElementById('player2-current')
 const player1Global = document.getElementById('player1-global')
 const player2Global = document.getElementById('player2-global')
+const diceDisplay = document.querySelector('figure')
 
 const randomNumber = (number) => {
   return Math.ceil(Math.random() * number);
@@ -24,7 +25,6 @@ class Game {
   constructor(players, roundNumber) {
     this.players = players
     this.roundNumber = 1
-    this.winner = null //voir si pertinent
   }
 
   playNewGame = () => {
@@ -68,8 +68,29 @@ class Player {
 
   rollDice = () => {
     let rollScore = randomNumber(6)
-    //ajouter ici l'affichage du dé
-    console.log(rollScore)
+    switch (rollScore) {
+      case 1:
+        diceDisplay.innerHTML = '<img src="images/face_1.png" alt="Dice face 1" width="150" height="150">'
+        break
+      case 2:
+        diceDisplay.innerHTML = '<img src="images/face_2.png" alt="Dice face 2" width="150" height="150">'
+        break
+      case 3:
+        diceDisplay.innerHTML = '<img src="images/face_3.png" alt="Dice face 3" width="150" height="150">'
+        break
+      case 4:
+        diceDisplay.innerHTML = '<img src="images/face_4.png" alt="Dice face 4" width="150" height="150">'
+        break
+      case 5:
+        diceDisplay.innerHTML = '<img src="images/face_5.png" alt="Dice face 5" width="150" height="150">'
+        break 
+      case 6:
+        diceDisplay.innerHTML = '<img src="images/face_6.png" alt="Dice face 6" width="150" height="150">'
+        break 
+      default:
+        diceDisplay.innerHTML = '<img src="images/placeholder.png" alt="Empty dice" width="150" height="150">'
+        break     
+    }
     if (rollScore !== 1) {
       this.roundScore += rollScore
     } else {
