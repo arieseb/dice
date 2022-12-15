@@ -5,3 +5,7 @@ html, body {
 .player1-wrapper, .player2-wrapper {
   min-height: 60vh;
 }
+
+#player1-global, #player2-global {
+  font-size: 6rem;
+}
