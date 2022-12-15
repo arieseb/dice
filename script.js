@@ -11,7 +11,7 @@ const player1Column = document.querySelector('.player1-wrapper')
 const player2Column = document.querySelector('.player2-wrapper')
 const dot = document.createElement('span')
 
-dot.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="5rem" height="5rem" fill="hsl(348, 100%, 61%)" class="bi bi-dot" viewBox="0 0 16 16"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>'
+dot.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="3rem" height="2rem" fill="hsl(348, 100%, 61%)" class="bi bi-caret-left-fill" viewBox="0 0 16 16"><path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/></svg>'
 
 const randomNumber = (number) => {
   return Math.ceil(Math.random() * number)
@@ -25,6 +25,7 @@ const defaultDisplay = () => {
   player1Current.innerText = player1.roundScore
   player2Current.innerText = player2.roundScore
   player1Column.classList.add('has-background-white-ter')
+  player1Name.classList.add('has-text-weight-semibold')
   player1Name.append(dot)
 }
 
@@ -123,15 +124,18 @@ class Player {
   }
 
   displayPlayerTurn = (event) => {
-    console.log(game.roundNumber)
     if (event.target.id === 'hold' || event.target.id === 'rollDice' && this.rollScore === 1) {
       if (game.roundNumber % 2 !== 0) {
         player1Column.classList.add('has-background-white-ter')
         player2Column.classList.remove('has-background-white-ter')
+        player1Name.classList.add('has-text-weight-semibold')
+        player2Name.classList.remove('has-text-weight-semibold')
         player1Name.append(dot)
       } else {
         player1Column.classList.remove('has-background-white-ter')
         player2Column.classList.add('has-background-white-ter')
+        player2Name.classList.add('has-text-weight-semibold')
+        player1Name.classList.remove('has-text-weight-semibold')
         player2Name.append(dot)
       }
     }
