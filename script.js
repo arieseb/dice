@@ -7,9 +7,14 @@ const player2Current = document.getElementById('player2-current')
 const player1Global = document.getElementById('player1-global')
 const player2Global = document.getElementById('player2-global')
 const diceDisplay = document.querySelector('figure')
+const player1Column = document.querySelector('.player1-wrapper')
+const player2Column = document.querySelector('.player2-wrapper')
+const dot = document.createElement('span')
+
+dot.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="5rem" height="5rem" fill="hsl(348, 100%, 61%)" class="bi bi-dot" viewBox="0 0 16 16"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>'
 
 const randomNumber = (number) => {
-  return Math.ceil(Math.random() * number);
+  return Math.ceil(Math.random() * number)
 }
 
 const defaultDisplay = () => {
@@ -19,6 +24,8 @@ const defaultDisplay = () => {
   player2Global.innerText = player2.globalScore
   player1Current.innerText = player1.roundScore
   player2Current.innerText = player2.roundScore
+  player1Column.classList.add('has-background-white-ter')
+  player1Name.append(dot)
 }
 
 class Game {
@@ -59,16 +66,17 @@ class Game {
 }
 
 class Player {
-  constructor(id, displayName, globalScore, roundScore) {
+  constructor(id, displayName, globalScore, roundScore, rollScore) {
     this.id = id
     this.displayName = displayName
     this.globalScore = 0
     this.roundScore = 0
+    this.rollScore = 0
   }
 
   rollDice = () => {
-    let rollScore = randomNumber(6)
-    switch (rollScore) {
+    this.rollScore = randomNumber(6)
+    switch (this.rollScore) {
       case 1:
         diceDisplay.innerHTML = '<img src="images/face_1.png" alt="Dice face 1" width="150" height="150">'
         break
@@ -91,8 +99,8 @@ class Player {
         diceDisplay.innerHTML = '<img src="images/placeholder.png" alt="Empty dice" width="150" height="150">'
         break     
     }
-    if (rollScore !== 1) {
-      this.roundScore += rollScore
+    if (this.rollScore !== 1) {
+      this.roundScore += this.rollScore
     } else {
       this.roundScore = 0
       document.getElementById(`${this.id}-current`).innerText = this.roundScore
@@ -113,6 +121,21 @@ class Player {
       game.winMessage(this.displayName)
     }
   }
+
+  displayPlayerTurn = (event) => {
+    console.log(game.roundNumber)
+    if (event.target.id === 'hold' || event.target.id === 'rollDice' && this.rollScore === 1) {
+      if (game.roundNumber % 2 !== 0) {
+        player1Column.classList.add('has-background-white-ter')
+        player2Column.classList.remove('has-background-white-ter')
+        player1Name.append(dot)
+      } else {
+        player1Column.classList.remove('has-background-white-ter')
+        player2Column.classList.add('has-background-white-ter')
+        player2Name.append(dot)
+      }
+    }
+  }
 }
 
 let player1 = new Player('player1', 'PLAYER 1', 0, 0)
@@ -127,4 +150,7 @@ defaultDisplay()
 
 for (button of controlBtn) {
   button.addEventListener('click', game.gameRound)
+  for (player of game.players) {
+    button.addEventListener('click', player.displayPlayerTurn)
+  }
 }
