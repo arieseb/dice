@@ -12,6 +12,12 @@ const player2Column = document.querySelector('.player2-wrapper')
 const dot = document.createElement('span')
 const victory = document.querySelector('.victory-modal')
 const victoryMessage = document.querySelector('.notification')
+const rules = document.querySelector('.rules-modal')
+const rulesBtn = document.getElementById('rules')
+
+rulesBtn.addEventListener('click', () => {
+  rules.classList.add('is-active')
+})
 
 dot.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="3rem" height="2rem" fill="hsl(348, 100%, 61%)" class="bi bi-caret-left-fill" viewBox="0 0 16 16"><path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/></svg>'
 

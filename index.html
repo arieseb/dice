@@ -75,8 +75,8 @@
                 <p id ="hold" class="has-text-weight-light">HOLD</p>
               </button>
             </div>
-            <div id ="rules">
-              <button class="button is-white is-large">
+            <div>
+              <button id="rules" class="button is-white is-large">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="1.4rem"
@@ -108,6 +108,32 @@
         <div class="modal-background"></div>
         <div class="modal-content">
           <div class="notification is-success is-light is-size-3 has-text-centered"></div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+      </div>
+      <div class="modal rules-modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          <div class="box columns m-0">
+            <div class="column is-1 is-flex is-flex-direction-column is-justify-content-space-around">
+              <img src="images/france.png" alt="Français" width="80" height="80">
+              <img src="images/uk.png" alt="English" width="80" height="80" class="mt-6">
+            </div>
+            <div class="column is-11 is-flex is-flex-direction-column p-0">
+                <p class="block">
+                Au cours de son tour de jeu, le joueur peut lancer le dé autant de fois qu'il le
+                souhaite.<br>Il peut cliquer sur <strong>HOLD</strong> à tout moment pour terminer son
+                tour et conserver son score.<br>S'il obtient un 1, il perd son score et c'est le tour
+                de l'autre joueur.<br>Le premier joueur à atteindre 100 points a gagné.
+              </p>
+              <p class="block">
+                During his turn, the player can roll the dice as many times as he wishes.<br> He can 
+                click anytime on the <strong>HOLD</strong> button to end his turn and keep his score.
+                <br>If he rolls a 1, his score is lost and the other player's turn takes place.<br>
+                The first player to reach 100 points wins the game.
+              </p>
+            </div>
+          </div>
         </div>
         <button class="modal-close is-large" aria-label="close"></button>
       </div>
