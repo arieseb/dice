@@ -1,3 +1,4 @@
+//Déclaration de tous les éléments du DOM nécessaires
 const newGame = document.getElementById('newGame')
 const controlBtn = document.querySelectorAll('.control-btn')
 const player1Name = document.getElementById('player1-name')
@@ -15,16 +16,20 @@ const victoryMessage = document.querySelector('.notification')
 const rules = document.querySelector('.rules-modal')
 const rulesBtn = document.getElementById('rules')
 
+//Evénement écoutant le bouton qui affiche les règles
 rulesBtn.addEventListener('click', () => {
   rules.classList.add('is-active')
 })
 
+//Icône indiquant le tour de jeu à injecter dans le DOM
 dot.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="3rem" height="2rem" fill="hsl(348, 100%, 61%)" class="bi bi-caret-left-fill" viewBox="0 0 16 16"><path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/></svg>'
 
+//Fonction générant un chiffre aléatoire
 const randomNumber = (number) => {
   return Math.ceil(Math.random() * number)
 }
 
+//Fonction définissant l'affichage par défaut
 const defaultDisplay = () => {
   player1Name.innerText = player1.displayName
   player2Name.innerText = player2.displayName
@@ -37,12 +42,14 @@ const defaultDisplay = () => {
   player1Name.append(dot)
 }
 
+//Classe définissant l'objet Game et ses méthodes d'instance associées
 class Game {
   constructor(players, roundNumber) {
     this.players = players
     this.roundNumber = 1
   }
 
+  //Méthode d'instance créant une nouvelle partie
   playNewGame = () => {
     player1 = new Player('player1', 'PLAYER 1', 0, 0)
     player2 = new Player('player 2', 'PLAYER 2', 0, 0)
@@ -50,6 +57,7 @@ class Game {
     defaultDisplay()
   }
 
+  //Méthode d'instance gérant un tour de jeu
   gameRound = (event) => {
     if (event.target.id === 'rollDice') {
       if (this.roundNumber % 2 !== 0) {
@@ -68,6 +76,7 @@ class Game {
     }
   }
 
+  //Méthode d'instance affichant le message de victoire
   winMessage = (winner) => {
     victory.classList.add('is-active')
     victoryMessage.innerText = `Bravo, ${winner} a gagné la partie !`
@@ -75,6 +84,7 @@ class Game {
   }
 }
 
+//Classe définissant l'objet Player et ses méthodes d'instance associées
 class Player {
   constructor(id, displayName, globalScore, roundScore, rollScore) {
     this.id = id
@@ -84,6 +94,7 @@ class Player {
     this.rollScore = 0
   }
 
+  //Méthode d'instance gérant le lancer et l'affichage du dé
   rollDice = () => {
     this.rollScore = randomNumber(6)
     switch (this.rollScore) {
@@ -120,6 +131,7 @@ class Player {
     document.getElementById(`${this.id}-current`).innerText = this.roundScore
   }
 
+  //Méthode d'instance définissant le comportement de la fonctionnalité Hold
   holdScore = () => {
     this.globalScore += this.roundScore
     this.roundScore = 0
@@ -132,6 +144,7 @@ class Player {
     }
   }
 
+  //Méthode d'instance permettant de styliser le tour de jeu
   displayPlayerTurn = (event) => {
     if (event.target.id === 'hold' || event.target.id === 'rollDice' && this.rollScore === 1) {
       if (game.roundNumber % 2 !== 0) {
@@ -151,16 +164,20 @@ class Player {
   }
 }
 
+//Déclaration des instances
 let player1 = new Player('player1', 'PLAYER 1', 0, 0)
 let player2 = new Player('player2', 'PLAYER 2', 0, 0)
 let game = new Game([player1, player2], 1)
 
+//Evénement écoutant le bouton qui lance une nouvelle partie
 newGame.addEventListener('click', () => {
   game.playNewGame()
 })
 
+//Appel de la fonction définissant l'affichage par défaut
 defaultDisplay()
 
+//Boucle sur les boutons Roll et Hold, permettant de gérer les événements associés à ceux-ci
 for (button of controlBtn) {
   button.addEventListener('click', game.gameRound)
   for (player of game.players) {
@@ -168,6 +185,7 @@ for (button of controlBtn) {
   }
 }
 
+//Fonction permettant de fermer les fenêtres modales
 (document.querySelectorAll('.modal-background, .modal-close') || []).forEach((close) => {
   const target = close.closest('.modal')
   close.addEventListener('click', () => {
